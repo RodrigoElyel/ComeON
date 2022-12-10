@@ -24,7 +24,6 @@ export default function MyStack() {
     <Stack.Navigator
       initialRouteName="Home"
       screenOptions={(props) => {
-        console.log(props.route);
         let routeName = props.route.name;
         return {
           headerShown: true,

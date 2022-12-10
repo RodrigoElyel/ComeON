@@ -1,10 +1,14 @@
-import { StackNavigationProp } from "@react-navigation/stack"
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export type propsNavigationStackHome = {
-    Home: undefined,
-    EventType: {
-        name: string
-    }
-}
+  Home: undefined;
+  EventType: {
+    event: {
+      name: string;
+      eventType: string;
+      image: React.ReactNode;
+    };
+  };
+};
 
-export type propsStackHome = StackNavigationProp<propsNavigationStackHome>
+export type propsStackHome = StackNavigationProp<propsNavigationStackHome>;

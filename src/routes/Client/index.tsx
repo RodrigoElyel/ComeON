@@ -20,6 +20,7 @@ export default function MyTabs() {
       initialRouteName="StackHome"
       screenOptions={({ route }) => ({
         headerShown: false,
+
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -31,14 +32,17 @@ export default function MyTabs() {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: STYLE.COLORS.primary,
+        tabBarActiveTintColor: STYLE.COLORS.secondary,
         tabBarInactiveTintColor: STYLE.COLORS.black,
+        tabBarStyle: {
+          backgroundColor: STYLE.COLORS.primary,
+        },
       })}
     >
       <Tab.Screen
         name="StackHome"
         component={StackHome}
-        options={{ tabBarLabel: "Eventos", }}
+        options={{ tabBarLabel: "Eventos" }}
       />
       <Tab.Screen
         name="StackProfile"
