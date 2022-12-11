@@ -65,7 +65,6 @@ const Home = () => {
                 image={item.image}
                 onPress={() => {
                   navigation.navigate("EventType", { event: { ...item } });
-                  console.log("asd");
                 }}
                 style={{ margin: 10 }}
               />

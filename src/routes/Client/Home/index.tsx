@@ -7,6 +7,7 @@ import { TouchableOpacity, View } from "react-native";
 // Screens
 import Home from "../../../screens/Client/Home";
 import EventType from "../../../screens/Client/EventType";
+import EventDetails from "../../../screens/Client/EventDetails";
 
 // Styles
 import STYLES from "../../../styles";
@@ -33,7 +34,7 @@ export default function MyStack() {
             elevation: 0,
             shadowOpacity: 0,
           },
-          // headerTitleAlign: "left",
+          headerTitleAlign: "left",
           headerTitleStyle: {
             fontFamily: STYLES.FONT_FAMILY.bold,
             fontSize: STYLES.SIZES.large,
@@ -58,6 +59,7 @@ export default function MyStack() {
     >
       <Stack.Screen name="Home" component={Home} options={{headerTitle: "ComeON"}}/>
       <Stack.Screen name="EventType" component={EventType} options={{headerTitle: "Eventos"}}/>
+      <Stack.Screen name="EventDetails" component={EventDetails} options={{headerTitle: "Detalhes"}}/>
     </Stack.Navigator>
   );
 }

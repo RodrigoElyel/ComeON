@@ -16,7 +16,6 @@ import Text from "../../Text";
 type Props = {
   label: string;
   local: string;
-  ticketValue: string;
   ticketAvailable: boolean;
   style?: React.CSSProperties;
   onPress: (() => void) | undefined;
@@ -25,27 +24,47 @@ type Props = {
 const EventDetails = ({
   label,
   local,
-  ticketValue,
   ticketAvailable,
   onPress,
   style,
 }: Props) => {
+  const getStatus = (status: boolean) => {
+    if (status) {
+      return {
+        color: STYLES.COLORS.success,
+        text: "Ingressos disponíveis",
+      };
+    } else {
+      return {
+        color: STYLES.COLORS.error,
+        text: "Esgotado",
+      };
+    }
+  };
+
   return (
     <S.ContainerCard style={style} onPress={onPress}>
-      <Image
-        style={[{ width: "40%", height: "100%", borderRadius: 8 }, S.cardShadow]}
-        source={PartyImage}
-        resizeMode="cover"
-      />
+      <S.ContainerImage>
+        <Image
+          style={{ width: "100%", height: "80%", borderRadius: 8 }}
+          source={PartyImage}
+          resizeMode="cover"
+        />
+        <Text
+          bold
+          size={STYLES.SIZES.smallMedium}
+          align="center"
+          color={getStatus(ticketAvailable).color}
+        >
+          {getStatus(ticketAvailable).text}
+        </Text>
+      </S.ContainerImage>
       <S.ContainerText>
         <Text bold size={STYLES.SIZES.medium} color={STYLES.COLORS.black}>
           {label}
         </Text>
         <Text bold size={STYLES.SIZES.medium} color={STYLES.COLORS.black}>
           {local}
-        </Text>
-        <Text bold size={STYLES.SIZES.medium} color={STYLES.COLORS.black}>
-          {ticketValue}
         </Text>
       </S.ContainerText>
     </S.ContainerCard>

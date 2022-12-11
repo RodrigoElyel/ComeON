@@ -14,6 +14,13 @@ export const ContainerCard = styled.TouchableOpacity`
   border-radius: 15px;
 `;
 
+export const ContainerImage = styled.View`
+  width: 40%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const ContainerText = styled.View`
   width: 55%;
   height: 100%;

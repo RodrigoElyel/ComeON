@@ -9,6 +9,22 @@ export type propsNavigationStackHome = {
       image: React.ReactNode;
     };
   };
+  EventDetails: {
+    details: {
+      name: string;
+      description: string;
+      local: {
+        name: string;
+        maps: string;
+      };
+      eventType: string;
+      ticket: {
+        name: string;
+        value: number;
+        ticketAvailable: boolean;
+      }[];
+    };
+  };
 };
 
 export type propsStackHome = StackNavigationProp<propsNavigationStackHome>;
