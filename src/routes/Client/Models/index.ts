@@ -30,6 +30,8 @@ export type propsNavigationStackHome = {
       ticketSimples: number;
       ticketCamarote: number;
       value: number;
+      local: string;
+      name: string;
     };
   };
 };

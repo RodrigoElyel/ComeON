@@ -112,6 +112,8 @@ const EventDetailsScreen = () => {
               ticketSimples: ticketSimples,
               ticketCamarote: ticketCamarote,
               value: getResult(),
+              name: details.name,
+              local: details.local.name,
             };
             navigation.navigate("Checkout", { ticket: data });
           },
@@ -179,15 +181,6 @@ const EventDetailsScreen = () => {
               color={STYLES.COLORS.black}
             />
           </S.ContainerCart>
-
-          {/* <Button
-                  label={event.region}
-                  onPress={() => {
-                    setRegion(event);
-                    setModalVisible(false);
-                  }}
-                  style={{ width: "100%", marginTop: 20 }}
-                /> */}
         </S.Bottom>
       </S.Container>
     </Screen>

@@ -27,6 +27,11 @@ import STYLES from "../../../styles";
 
 // Image
 import ImageDetails from "../../../assets/imageDetails.png";
+
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { purchaseTicket } from "../../../redux/actions/userAction";
+
 // Navigation
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { propsStackHome } from "../../../routes/Client/Models";
@@ -46,6 +51,8 @@ type Checkout = {
 const CheckoutScreen = () => {
   const navigation = useNavigation<propsStackHome>();
   const route = useRoute<RouteProp<Checkout, "Checkout">>();
+  const dispatch = useDispatch();
+  const userData = useSelector((store: any) => store.user);
   const { ticket } = route?.params;
   const [loading, setLoading] = React.useState(false);
   const [paymentSuccess, setPaymentSuccess] = React.useState(false);
@@ -55,9 +62,12 @@ const CheckoutScreen = () => {
   const [cvv, setCvv] = React.useState("");
 
   const submit = () => {
+    let newArray = userData.purchaseHistory;
+    newArray.push(ticket);
     setTimeout(() => {
       setLoading(false);
       setPaymentSuccess(true);
+      dispatch(purchaseTicket(newArray));
     }, 2000);
   };
 

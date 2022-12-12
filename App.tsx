@@ -1,4 +1,6 @@
 import Routes from "./src/routes";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 
 // Fonts
 import {
@@ -20,5 +22,9 @@ export default function App() {
   if (!fontsLoaded) {
     return <></>;
   }
-  return <Routes />;
+  return (
+    <Provider store={store}>
+      <Routes />
+    </Provider>
+  );
 }

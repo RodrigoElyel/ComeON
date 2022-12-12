@@ -23,7 +23,7 @@ import Festas from "../../../assets/festas.png";
 import { useNavigation } from "@react-navigation/native";
 import { propsStackHome } from "../../../routes/Client/Models";
 
-const Home = () => {
+const HomeScreen = () => {
   const navigation = useNavigation<propsStackHome>();
 
   const EventTypes = [
@@ -76,14 +76,4 @@ const Home = () => {
   );
 };
 
-export default Home;
-
-{
-  /* <Button label="Start" onPress={() => console.log("asd")} />
-<Input
-  value=""
-  keyboardType="default"
-  placeholder="asd"
-  onChangeText={(e) => console.log(e)}
-/> */
-}
+export default HomeScreen;
