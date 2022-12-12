@@ -33,6 +33,17 @@ export const ContainerSelect = styled.View`
   background-color: ${STYLES.COLORS.white};
 `;
 
+export const ContainerCart = styled.TouchableOpacity`
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  padding: 8px;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8px;
+  background-color: ${STYLES.COLORS.white};
+`;
+
 export const ContainerAddRemove = styled.View`
   width: 30%;
   flex-direction: row;

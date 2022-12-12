@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, FlatList, Image } from "react-native";
+import { View, TouchableOpacity, FlatList, Image, Alert } from "react-native";
 import React from "react";
 
 // Components
@@ -97,6 +97,29 @@ const EventDetailsScreen = () => {
     return sum;
   };
 
+  const submit = () => {
+    Alert.alert(
+      "Atenção",
+      `Você deseja finalizar a compra:\n${
+        ticketSimples !== 0 ? ticketSimples + "x Simples" : ""
+      }\n${ticketCamarote !== 0 ? ticketCamarote + "x Camarote" : ""}\n`,
+      [
+        { text: "Sair", style: "destructive" },
+        {
+          text: "Realizar pagamento",
+          onPress: () => {
+            let data = {
+              ticketSimples: ticketSimples,
+              ticketCamarote: ticketCamarote,
+              value: getResult(),
+            };
+            navigation.navigate("Checkout", { ticket: data });
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <Screen>
       <S.Container>
@@ -109,7 +132,7 @@ const EventDetailsScreen = () => {
             {details?.ticket.map((ticket: TicketProps) => {
               if (ticket.ticketAvailable) {
                 return (
-                  <S.ContainerSelect>
+                  <S.ContainerSelect key={ticket.name}>
                     <Text
                       bold
                       size={STYLES.SIZES.medium}
@@ -146,7 +169,7 @@ const EventDetailsScreen = () => {
             })}
           </View>
 
-          <S.ContainerSelect>
+          <S.ContainerCart onPress={() => submit()}>
             <Text bold size={STYLES.SIZES.medium} style={{ width: "90%" }}>
               Valor: {formatCurrency(getResult())}
             </Text>
@@ -154,9 +177,8 @@ const EventDetailsScreen = () => {
               name={"cart"}
               size={STYLES.SIZES.large}
               color={STYLES.COLORS.black}
-              onPress={() => {}}
             />
-          </S.ContainerSelect>
+          </S.ContainerCart>
 
           {/* <Button
                   label={event.region}

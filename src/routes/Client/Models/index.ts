@@ -25,6 +25,13 @@ export type propsNavigationStackHome = {
       }[];
     };
   };
+  Checkout: {
+    ticket: {
+      ticketSimples: number;
+      ticketCamarote: number;
+      value: number;
+    };
+  };
 };
 
 export type propsStackHome = StackNavigationProp<propsNavigationStackHome>;

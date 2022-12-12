@@ -9,6 +9,7 @@ import STYLES from "../../styles";
 
 // Components
 import Text from "../Text";
+import { TextInputMaskOptionProp } from "react-native-masked-text";
 
 type Props = {
   style?: React.CSSProperties;
@@ -24,9 +25,11 @@ type Props = {
   isValid?: boolean;
   hasError?: boolean;
   errorMessage?: string;
+  typeMask: string;
+  optionsMask: TextInputMaskOptionProp;
 };
 
-const Input = ({
+const InputMask = ({
   style,
   keyboardType = "default",
   value = "",
@@ -39,6 +42,8 @@ const Input = ({
   isValid,
   hasError,
   errorMessage,
+  typeMask,
+  optionsMask,
   ...rest
 }: Props) => {
   return (
@@ -49,16 +54,18 @@ const Input = ({
         hasError={hasError}
       >
         <S.Input
+          type={typeMask ? typeMask : "custom"}
+          options={optionsMask ? optionsMask : null}
           autoComplete="off"
           autoCorrect={false}
           disabled={disabled}
           value={value}
           placeholder={placeholder}
           placeholderTextColor={STYLES.COLORS.middleGray}
-          onChangeText={onChangeText}
           keyboardType={keyboardType}
           editable={!disabled}
           style={{ width: icon ? "85%" : "100%" }}
+          onChangeText={onChangeText}
           {...rest}
         />
         {icon && (
@@ -89,4 +96,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default InputMask;

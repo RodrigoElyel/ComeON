@@ -8,6 +8,7 @@ import { TouchableOpacity, View } from "react-native";
 import Home from "../../../screens/Client/Home";
 import EventType from "../../../screens/Client/EventType";
 import EventDetails from "../../../screens/Client/EventDetails";
+import Checkout from "../../../screens/Client/Checkout";
 
 // Styles
 import STYLES from "../../../styles";
@@ -60,6 +61,7 @@ export default function MyStack() {
       <Stack.Screen name="Home" component={Home} options={{headerTitle: "ComeON"}}/>
       <Stack.Screen name="EventType" component={EventType} options={{headerTitle: "Eventos"}}/>
       <Stack.Screen name="EventDetails" component={EventDetails} options={{headerTitle: "Detalhes"}}/>
+      <Stack.Screen name="Checkout" component={Checkout} options={{headerTitle: "Pagamento"}}/>
     </Stack.Navigator>
   );
 }
