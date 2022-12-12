@@ -26,10 +26,10 @@ import Reveillon from "../../../assets/reveillon.png";
 import Festas from "../../../assets/festas.png";
 
 // Navigation
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { propsStackHome } from "../../../routes/Client/Models";
 
-type Event = {
+type EventDetails = {
   region: string;
   list: {
     name: string;
@@ -47,11 +47,22 @@ type Event = {
   }[];
 };
 
+type EventType = {
+  EventType: {
+    event: {
+      name: string;
+      eventType: string;
+      image: React.ReactNode;
+    };
+  };
+};
+
 const EventTypeScreen = () => {
   const navigation = useNavigation<propsStackHome>();
-  const route = useRoute();
+  const route = useRoute<RouteProp<EventType, "EventType">>();
+  const { event } = route.params;
 
-  const [region, setRegion] = React.useState<Event>();
+  const [region, setRegion] = React.useState<EventDetails>();
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const Events = [
@@ -239,7 +250,7 @@ const EventTypeScreen = () => {
       <S.Container>
         <S.Top>
           <Text bold size={STYLES.SIZES.large}>
-            {route?.params?.event.name}
+            {event.name}
           </Text>
         </S.Top>
         <S.Bottom>
@@ -256,7 +267,7 @@ const EventTypeScreen = () => {
             data={Events?.find(
               (it) => it.region === region?.region
             )?.list.filter(
-              (type) => type.eventType === route?.params?.event.eventType
+              (type) => type.eventType === event.eventType
             )}
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (

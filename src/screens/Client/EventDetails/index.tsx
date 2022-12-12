@@ -23,7 +23,7 @@ import STYLES from "../../../styles";
 // Image
 import ImageDetails from "../../../assets/imageDetails.png";
 // Navigation
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { propsStackHome } from "../../../routes/Client/Models";
 
 type TicketProps = {
@@ -32,9 +32,29 @@ type TicketProps = {
   ticketAvailable: boolean;
 };
 
+type EventDetails = {
+  EventDetails: {
+    details: {
+      name: string;
+      description: string;
+      local: {
+        name: string;
+        maps: string;
+      };
+      eventType: string;
+      ticket: {
+        name: string;
+        value: number | 0;
+        ticketAvailable: boolean;
+      }[];
+    };
+  };
+};
+
 const EventDetailsScreen = () => {
   const navigation = useNavigation<propsStackHome>();
-  const route = useRoute();
+  const route = useRoute<RouteProp<EventDetails, "EventDetails">>();
+  const { details } = route?.params;
   const [ticketSimples, setTicketSimples] = React.useState(0);
   const [ticketCamarote, setTicketCamarote] = React.useState(0);
 
@@ -58,16 +78,35 @@ const EventDetailsScreen = () => {
     }
   };
 
+  const getResult = () => {
+    var sum = 0;
+    var valueTicketSimples = details?.ticket.find(
+      (it: TicketProps) => it?.name === "Simples"
+    )?.value;
+    var valueTicketCamarote = details?.ticket.find(
+      (it: TicketProps) => it?.name === "Camarote"
+    )?.value;
+
+    if (ticketSimples !== 0 && valueTicketSimples) {
+      sum += ticketSimples * valueTicketSimples;
+    }
+    if (ticketCamarote !== 0 && valueTicketCamarote) {
+      sum += ticketCamarote * valueTicketCamarote;
+    }
+    console.log(sum);
+    return sum;
+  };
+
   return (
     <Screen>
       <S.Container>
         <S.Top source={ImageDetails} resizeMode="resize" />
         <S.Bottom>
           <Text bold size={STYLES.SIZES.medium} align="justify">
-            {route?.params?.details.description}
+            {details?.description}
           </Text>
           <View>
-            {route?.params?.details.ticket.map((ticket: TicketProps) => {
+            {details?.ticket.map((ticket: TicketProps) => {
               if (ticket.ticketAvailable) {
                 return (
                   <S.ContainerSelect>
@@ -109,21 +148,7 @@ const EventDetailsScreen = () => {
 
           <S.ContainerSelect>
             <Text bold size={STYLES.SIZES.medium} style={{ width: "90%" }}>
-              Valor:{" "}
-              {formatCurrency(
-                (ticketSimples !== 0
-                  ? ticketSimples *
-                    route?.params?.details.ticket.find(
-                      (it: TicketProps) => it.name === "Simples"
-                    ).value
-                  : 0) +
-                  (ticketCamarote !== 0
-                    ? ticketCamarote *
-                      route?.params?.details.ticket.find(
-                        (it: TicketProps) => it.name === "Camarote"
-                      ).value
-                    : 0)
-              )}
+              Valor: {formatCurrency(getResult())}
             </Text>
             <Ionicons
               name={"cart"}
