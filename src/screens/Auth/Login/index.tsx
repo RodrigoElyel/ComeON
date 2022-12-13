@@ -30,6 +30,7 @@ import { propsStackHome } from "../../../routes/Client/Models";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { saveUser } from "../../../redux/actions/userAction";
+import { logIn } from "../../../redux/actions/authAction";
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -51,29 +52,26 @@ const LoginScreen = () => {
         : {
             registeredEvents: [
               {
-                region: "Piauí",
-                list: [
+                id: 1,
+                name: "Pool Party",
+                description:
+                  "Drinks, chopps, comidinhas, shots, open bar na final, ainda vai contar com uma edição simultânea na Europa em Lisboa e edições especiais CARNAVALZINHO, com outras assinadas pelos times do CAMAROTE ALLEGRIA e ISSO NÃO É UMA FESTA. ",
+                local: {
+                  region: "Piauí",
+                  name: "Luís Correia - PI",
+                  maps: "https://goo.gl/maps/KJb7nFcatZkcr7zp6",
+                },
+                eventType: "reveillon",
+                ticket: [
                   {
-                    name: "Pool Party",
-                    description:
-                      "Drinks, chopps, comidinhas, shots, open bar na final, ainda vai contar com uma edição simultânea na Europa em Lisboa e edições especiais CARNAVALZINHO, com outras assinadas pelos times do CAMAROTE ALLEGRIA e ISSO NÃO É UMA FESTA. ",
-                    local: {
-                      name: "Luís Correia - PI",
-                      maps: "https://goo.gl/maps/KJb7nFcatZkcr7zp6",
-                    },
-                    eventType: "reveillon",
-                    ticket: [
-                      {
-                        name: "Simples",
-                        value: 39.99,
-                        ticketAvailable: false,
-                      },
-                      {
-                        name: "Camarote",
-                        value: 89.99,
-                        ticketAvailable: true,
-                      },
-                    ],
+                    name: "Simples",
+                    value: 39.99,
+                    ticketAvailable: false,
+                  },
+                  {
+                    name: "Camarote",
+                    value: 89.99,
+                    ticketAvailable: true,
                   },
                 ],
               },
@@ -85,10 +83,10 @@ const LoginScreen = () => {
         name: "Rodrigo Elyel",
         phone: "86995279594",
         type: type,
-        logged: true,
         ...additionalData,
       })
     );
+    dispatch(logIn(type));
   };
 
   return (

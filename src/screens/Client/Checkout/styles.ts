@@ -12,13 +12,13 @@ export const Container = styled.View`
 
 export const Top = styled.View`
   width: 95%;
-  height: 30%;
+  height: 40%;
   margin-top: 8px;
 `;
 
 export const Bottom = styled.View`
   width: 95%;
-  height: 70%;
+  height: 60%;
   justify-content: space-around;
 `;
 

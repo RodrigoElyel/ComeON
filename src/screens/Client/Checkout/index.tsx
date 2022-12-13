@@ -7,7 +7,6 @@ import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import InputMask from "../../../components/InputMask";
 import Screen from "../../../components/Screen";
-import EventDetails from "../../../components/Cards/EventDetails";
 
 // Lottie
 import Lottie from "lottie-react-native";
@@ -17,16 +16,13 @@ import Success from "../../../assets/Lottie/success.json";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Services
-import { formatCurrency } from "../../../services/Utils/money";
+import { AlertFlashMessage } from "../../../services/AlertFlashMessage";
 
 // Styled-Component
 import * as S from "./styles";
 
 // Styles
 import STYLES from "../../../styles";
-
-// Image
-import ImageDetails from "../../../assets/imageDetails.png";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -44,6 +40,8 @@ type Checkout = {
       ticketSimples: number;
       ticketCamarote: number;
       value: number;
+      name: string;
+      local: string;
     };
   };
 };
@@ -54,6 +52,7 @@ const CheckoutScreen = () => {
   const dispatch = useDispatch();
   const userData = useSelector((store: any) => store.user);
   const { ticket } = route?.params;
+  console.log(ticket);
   const [loading, setLoading] = React.useState(false);
   const [paymentSuccess, setPaymentSuccess] = React.useState(false);
   const [cardNumber, setCardNumber] = React.useState("");
@@ -62,12 +61,16 @@ const CheckoutScreen = () => {
   const [cvv, setCvv] = React.useState("");
 
   const submit = () => {
-    let newArray = userData.purchaseHistory;
-    newArray.push(ticket);
+    if (!cardNumber.length || !expire.length || !name.length || !cvv.length) {
+      AlertFlashMessage("danger", "Preencha todos os dados");
+      setLoading(false);
+      return;
+    }
+
     setTimeout(() => {
       setLoading(false);
       setPaymentSuccess(true);
-      dispatch(purchaseTicket(newArray));
+      dispatch(purchaseTicket(ticket));
     }, 2000);
   };
 
@@ -203,7 +206,7 @@ const CheckoutScreen = () => {
             </ScrollView>
 
             <Button
-              label={"Pagar"}
+              label={"Cadastrar"}
               loading={loading}
               onPress={() => {
                 setLoading(true);

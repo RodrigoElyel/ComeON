@@ -1,25 +1,52 @@
+import { ticket, event, user } from "../actions/userAction";
+
 const initialState = {
-  logged: false,
   purchaseHistory: [],
-  registeredEvents: []
+  registeredEvents: [],
 };
 
-export default (state = initialState, action: any) => {
+type ActionProps = {
+  type: string;
+  user: any;
+};
+
+export default (state = initialState, action: ActionProps) => {
   switch (action.type) {
     case "SAVE_USER":
       return {
         ...state,
         ...action.user,
       };
-    case "LOG_OUT":
-      return {
-        logged: false,
-      };
     case "PURCHASE_TICKET":
-      console.log({action})
+      let newArrayTicket: ticket[] = state.purchaseHistory;
+      newArrayTicket.push(action?.user);
       return {
         ...state,
-        purchaseHistory: action.user,
+        purchaseHistory: newArrayTicket,
+      };
+    case "ADD_EVENT":
+      let newArrayEvent: event[] = state.registeredEvents;
+      newArrayEvent.push(action?.user);
+      return {
+        ...state,
+        registeredEvents: newArrayEvent,
+      };
+    case "REMOVE_EVENT":
+      return {
+        ...state,
+        registeredEvents: state.registeredEvents.filter(
+          (event: event) => event.id !== action.user.id
+        ),
+      };
+    case "EDIT_EVENT":
+      return {
+        ...state,
+        registeredEvents: [
+          ...state.registeredEvents.filter(
+            (event: event) => event.id !== action.user.id
+          ),
+          action.user,
+        ],
       };
     default:
       return state;

@@ -19,7 +19,7 @@ import Person from "../../../assets/person.png";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Client/Models";
+import { propsStackProfile } from "../../../routes/Admin/Models";
 
 // Services
 import { formatPhone } from "../../../services/Utils/phone";
@@ -29,16 +29,8 @@ import { formatCurrency } from "../../../services/Utils/money";
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../../redux/actions/authAction";
 
-type Purchase = {
-  ticketSimples: number;
-  ticketCamarote: number;
-  value: number;
-  name: string;
-  local: string;
-};
-
 const ProfileScreen = () => {
-  const navigation = useNavigation<propsStackHome>();
+  const navigation = useNavigation<propsStackProfile>();
   const dispatch = useDispatch();
   const userData = useSelector((store: any) => store.user);
 
@@ -62,23 +54,16 @@ const ProfileScreen = () => {
         </S.Top>
         <S.Center>
           <Text bold align="center" style={{ marginTop: 30 }}>
-            Histórico de compras
+            Área do Admin
           </Text>
-
-          {userData?.purchaseHistory?.map((purchase: Purchase) => {
-            return (
-              <S.ContainerInfo
-                key={purchase.name}
-                style={{ borderRadius: 15, height: 85 }}
-              >
-                <Text bold align="center">
-                  {purchase.name}
-                </Text>
-                <Text align="center">{purchase.local}</Text>
-                <Text align="center">{formatCurrency(purchase.value)}</Text>
-              </S.ContainerInfo>
-            );
-          })}
+          <S.ContainerInfo
+            onPress={() => navigation.navigate("Register")}
+            style={{ borderRadius: 15, height: 50, justifyContent: "center" }}
+          >
+            <Text bold align="center">
+              Cadastrar evento
+            </Text>
+          </S.ContainerInfo>
         </S.Center>
         <S.Bottom>
           <Button
