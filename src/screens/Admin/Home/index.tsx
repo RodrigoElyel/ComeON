@@ -25,50 +25,24 @@ import Festas from "../../../assets/festas.png";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Admin/Models";
+import { propsStackHome, TicketProps, ListEventProps } from "../../../routes/Admin/Models";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import {
-  removeEvent,
-  user as userProps,
+  removeEvent
 } from "../../../redux/actions/userAction";
-
-type ticket = {
-  name: string;
-  value: number;
-  ticketAvailable: boolean;
-};
-
-type event = {
-  id: number;
-  name: string;
-  description: string;
-  local: {
-    region: string;
-    name: string;
-    maps: string;
-  };
-  eventType: string;
-  ticket: {
-    name: string;
-    value: number;
-    ticketAvailable: boolean;
-  }[];
-};
 
 const HomeScreen = () => {
   const navigation = useNavigation<propsStackHome>();
   const dispatch = useDispatch();
   const userData = useSelector((store: any) => store.user);
   const [search, setSearch] = React.useState("");
-  // const [userData, setUserData] = React.useState<userProps>();
-  // console.log(JSON.stringify(userData, null, 2));
 
   const filterSearch =
     search !== ""
       ? userData?.registeredEvents.filter(
-          (item: event) =>
+          (item: ListEventProps) =>
             item?.name.toLowerCase().includes(search?.toLowerCase()) ||
             item?.local.region.toLowerCase().includes(search?.toLowerCase())
         )
@@ -103,10 +77,10 @@ const HomeScreen = () => {
               <EventDetailsAdmin
                 label={item.name}
                 ticketSimples={
-                  item.ticket.find((it: ticket) => it.name === "Simples").value
+                  item.ticket.find((it: TicketProps) => it.name === "Simples").value
                 }
                 ticketCamarote={
-                  item.ticket.find((it: ticket) => it.name === "Camarote").value
+                  item.ticket.find((it: TicketProps) => it.name === "Camarote").value
                 }
                 region={item.local.region}
                 onPressRemove={() => {
@@ -114,10 +88,10 @@ const HomeScreen = () => {
                 }}
                 onPressEdit={() => {
                   let getSimples = item.ticket.find(
-                    (it: ticket) => it.name === "Simples"
+                    (it: TicketProps) => it.name === "Simples"
                   ).value;
                   let getCamarote = item.ticket.find(
-                    (it: ticket) => it.name === "Camarote"
+                    (it: TicketProps) => it.name === "Camarote"
                   ).value;
                   navigation.navigate("Edit", {
                     event: {

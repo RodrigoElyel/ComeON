@@ -24,7 +24,7 @@ import { AlertFlashMessage } from "../../../services/AlertFlashMessage";
 
 // Navigation
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Admin/Models";
+import { propsStackHome, EditEventProps } from "../../../routes/Admin/Models";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
@@ -33,13 +33,7 @@ import { formatCurrency } from "../../../services/Utils/money";
 
 type Edit = {
   Edit: {
-    event: {
-      id: number;
-      name: string;
-      ticketSimples: number;
-      ticketCamarote: number;
-      region: string;
-    };
+    event: EditEventProps;
   };
 };
 
