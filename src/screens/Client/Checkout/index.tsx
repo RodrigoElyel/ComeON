@@ -1,4 +1,10 @@
-import { View, TouchableOpacity, ScrollView, Image } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Pressable,
+} from "react-native";
 import React from "react";
 
 // Components
@@ -49,7 +55,6 @@ const CheckoutScreen = () => {
   const dispatch = useDispatch();
   const userData = useSelector((store: any) => store.user);
   const { ticket } = route?.params;
-  console.log(ticket);
   const [loading, setLoading] = React.useState(false);
   const [paymentSuccess, setPaymentSuccess] = React.useState(false);
   const [cardNumber, setCardNumber] = React.useState("");
@@ -142,7 +147,7 @@ const CheckoutScreen = () => {
             </S.ContainerFront>
           </S.Top>
           <S.Bottom>
-            <ScrollView>
+            <Pressable>
               <InputMask
                 typeMask={"custom"}
                 optionsMask={{
@@ -200,7 +205,7 @@ const CheckoutScreen = () => {
                   }}
                 />
               </View>
-            </ScrollView>
+            </Pressable>
 
             <Button
               label={"Cadastrar"}
@@ -209,7 +214,7 @@ const CheckoutScreen = () => {
                 setLoading(true);
                 submit();
               }}
-              style={{ width: "100%", marginBottom: 20 }}
+              style={{ width: "100%" }}
             />
           </S.Bottom>
         </S.Container>

@@ -41,7 +41,6 @@ const EditScreen = () => {
   const navigation = useNavigation<propsStackHome>();
   const route = useRoute<RouteProp<Edit, "Edit">>();
   const { event } = route.params;
-  console.log(event);
   const dispatch = useDispatch();
   const userData = useSelector((store: any) => store.user);
   const [name, setName] = React.useState("");
@@ -81,7 +80,6 @@ const EditScreen = () => {
       ],
     };
 
-    console.log(JSON.stringify(data, null, 2));
 
     setTimeout(() => {
       setLoading(false);

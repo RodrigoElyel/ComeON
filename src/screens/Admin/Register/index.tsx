@@ -40,7 +40,6 @@ const RegisterScreen = () => {
   const [region, setRegion] = React.useState("");
   const [modalVisible, setModalVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  console.log(navigation);
 
   const submit = () => {
     if (
@@ -50,6 +49,7 @@ const RegisterScreen = () => {
       !region.length
     ) {
       AlertFlashMessage("danger", "Preencha todos os dados");
+      setLoading(false);
       return;
     }
 
@@ -78,7 +78,6 @@ const RegisterScreen = () => {
       ],
     };
 
-    console.log(JSON.stringify(data, null, 2));
 
     setTimeout(() => {
       setLoading(false);

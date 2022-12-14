@@ -5,10 +5,10 @@ import { showMessage } from "react-native-flash-message";
 
 export const AlertFlashMessage = (type = "info", description) => {
   const message = (type) => {
-    if (type === "success") return "Success";
-    if (type === "danger") return "Error";
-    if (type === "info") return "Warning";
-    if (type === "warning") return "Warning";
+    if (type === "success") return "Sucesso";
+    if (type === "danger") return "Erro";
+    if (type === "info") return "Atenção";
+    if (type === "warning") return "Atenção";
 
     return "Atenção";
   };

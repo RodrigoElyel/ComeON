@@ -12,14 +12,13 @@ export const Container = styled.View`
 
 export const Top = styled.View`
   width: 95%;
-  height: 40%;
-  margin-top: 8px;
+  height: 35%;
+  justify-content: center;
 `;
 
-export const Bottom = styled.View`
+export const Bottom = styled.ScrollView`
   width: 95%;
-  height: 60%;
-  justify-content: space-around;
+  height: 65%;
 `;
 
 export const ContainerAddRemove = styled.View`

@@ -13,6 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 // Services
 import { formatCurrency } from "../../../services/Utils/money";
+import { AlertFlashMessage } from "../../../services/AlertFlashMessage";
 
 // Styled-Component
 import * as S from "./styles";
@@ -78,11 +79,18 @@ const EventDetailsScreen = () => {
     if (ticketCamarote !== 0 && valueTicketCamarote) {
       sum += ticketCamarote * valueTicketCamarote;
     }
-    console.log(sum);
     return sum;
   };
 
   const submit = () => {
+    if (ticketSimples === 0 && ticketCamarote === 0) {
+      AlertFlashMessage(
+        "warning",
+        "Você precisa adicionar algum tipo de ingresso!"
+      );
+      return;
+    }
+
     Alert.alert(
       "Atenção",
       `Você deseja finalizar a compra:\n${
@@ -110,7 +118,7 @@ const EventDetailsScreen = () => {
   return (
     <Screen>
       <S.Container>
-        <S.Top source={ImageDetails} resizeMode="resize" />
+        <S.Top source={ImageDetails} resizeMode="stretch" />
         <S.Bottom>
           <Text bold size={STYLES.SIZES.medium} align="justify">
             {details?.description}

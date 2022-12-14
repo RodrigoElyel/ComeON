@@ -61,7 +61,7 @@ const EventDetailsAdmin = ({
           Simples: {ticketSimples}
         </Text>
         <Text bold size={STYLES.SIZES.smallMedium} color={STYLES.COLORS.black}>
-          Camarote: {ticketSimples}
+          Camarote: {ticketCamarote}
         </Text>
       </S.ContainerText>
       <S.ContainerIcons>
