@@ -24,30 +24,15 @@ import STYLES from "../../../styles";
 import ImageDetails from "../../../assets/imageDetails.png";
 // Navigation
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Client/Models";
-
-type TicketProps = {
-  name: string;
-  value: number;
-  ticketAvailable: boolean;
-};
+import {
+  propsStackHome,
+  TicketProps,
+  ListEventProps,
+} from "../../../routes/Client/Models";
 
 type EventDetails = {
   EventDetails: {
-    details: {
-      name: string;
-      description: string;
-      local: {
-        name: string;
-        maps: string;
-      };
-      eventType: string;
-      ticket: {
-        name: string;
-        value: number | 0;
-        ticketAvailable: boolean;
-      }[];
-    };
+    details: ListEventProps;
   };
 };
 

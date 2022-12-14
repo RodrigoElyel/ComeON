@@ -19,7 +19,10 @@ import Person from "../../../assets/person.png";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Client/Models";
+import {
+  propsStackHome,
+  TicketPurchasedProps,
+} from "../../../routes/Client/Models";
 
 // Services
 import { formatPhone } from "../../../services/Utils/phone";
@@ -28,14 +31,6 @@ import { formatCurrency } from "../../../services/Utils/money";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { logOut } from "../../../redux/actions/authAction";
-
-type Purchase = {
-  ticketSimples: number;
-  ticketCamarote: number;
-  value: number;
-  name: string;
-  local: string;
-};
 
 const ProfileScreen = () => {
   const navigation = useNavigation<propsStackHome>();
@@ -65,17 +60,17 @@ const ProfileScreen = () => {
             Histórico de compras
           </Text>
 
-          {userData?.purchaseHistory?.map((purchase: Purchase) => {
+          {userData?.purchaseHistory?.map((ticket: TicketPurchasedProps) => {
             return (
               <S.ContainerInfo
-                key={purchase.name}
+                key={ticket.name}
                 style={{ borderRadius: 15, height: 85 }}
               >
                 <Text bold align="center">
-                  {purchase.name}
+                  {ticket.name}
                 </Text>
-                <Text align="center">{purchase.local}</Text>
-                <Text align="center">{formatCurrency(purchase.value)}</Text>
+                <Text align="center">{ticket.local}</Text>
+                <Text align="center">{formatCurrency(ticket.value)}</Text>
               </S.ContainerInfo>
             );
           })}

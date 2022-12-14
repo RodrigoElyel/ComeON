@@ -27,33 +27,15 @@ import Festas from "../../../assets/festas.png";
 
 // Navigation
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Client/Models";
-
-type EventDetails = {
-  region: string;
-  list: {
-    name: string;
-    description: string;
-    local: {
-      name: string;
-      maps: string;
-    };
-    eventType: string;
-    ticket: {
-      name: string;
-      value: number;
-      ticketAvailable: boolean;
-    }[];
-  }[];
-};
+import {
+  propsStackHome,
+  EventDetailsProps,
+  EventTypeProps,
+} from "../../../routes/Client/Models";
 
 type EventType = {
   EventType: {
-    event: {
-      name: string;
-      eventType: string;
-      image: React.ReactNode;
-    };
+    event: EventTypeProps;
   };
 };
 
@@ -62,7 +44,7 @@ const EventTypeScreen = () => {
   const route = useRoute<RouteProp<EventType, "EventType">>();
   const { event } = route.params;
 
-  const [region, setRegion] = React.useState<EventDetails>();
+  const [region, setRegion] = React.useState<EventDetailsProps>();
   const [modalVisible, setModalVisible] = React.useState(false);
 
   const Events = [
@@ -266,9 +248,7 @@ const EventTypeScreen = () => {
           <FlatList
             data={Events?.find(
               (it) => it.region === region?.region
-            )?.list.filter(
-              (type) => type.eventType === event.eventType
-            )}
+            )?.list.filter((type) => type.eventType === event.eventType)}
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (
               <EventDetails

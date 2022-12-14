@@ -30,19 +30,16 @@ import { purchaseTicket } from "../../../redux/actions/userAction";
 
 // Navigation
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { propsStackHome } from "../../../routes/Client/Models";
+import {
+  propsStackHome,
+  TicketPurchasedProps,
+} from "../../../routes/Client/Models";
 
 import FlipCard from "react-native-flip-card";
 
 type Checkout = {
   Checkout: {
-    ticket: {
-      ticketSimples: number;
-      ticketCamarote: number;
-      value: number;
-      name: string;
-      local: string;
-    };
+    ticket: TicketPurchasedProps;
   };
 };
 
