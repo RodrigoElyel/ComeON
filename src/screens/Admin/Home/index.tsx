@@ -25,13 +25,16 @@ import Festas from "../../../assets/festas.png";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
-import { propsStackHome, TicketProps, ListEventProps } from "../../../routes/Admin/Models";
+import {
+  propsStackHome,
+  TicketProps,
+  ListEventProps,
+} from "../../../routes/Admin/Models";
 
 // redux
 import { useSelector, useDispatch } from "react-redux";
-import {
-  removeEvent
-} from "../../../redux/actions/userAction";
+import { removeEvent } from "../../../redux/actions/userAction";
+import { formatCurrency } from "../../../services/Utils/money";
 
 const HomeScreen = () => {
   const navigation = useNavigation<propsStackHome>();
@@ -63,7 +66,7 @@ const HomeScreen = () => {
                 color={STYLES.COLORS.black}
               />
             }
-            style={{ width: "95%", marginTop: 24 }}
+            style={{ width: "100%", marginTop: 24 }}
             onChangeText={(value: string) => {
               setSearch(value?.toUpperCase());
             }}
@@ -73,39 +76,37 @@ const HomeScreen = () => {
           <FlatList
             data={filterSearch}
             keyExtractor={(item) => item.name}
-            renderItem={({ item }) => (
-              <EventDetailsAdmin
-                label={item.name}
-                ticketSimples={
-                  item.ticket.find((it: TicketProps) => it.name === "Simples").value
-                }
-                ticketCamarote={
-                  item.ticket.find((it: TicketProps) => it.name === "Camarote").value
-                }
-                region={item.local.region}
-                onPressRemove={() => {
-                  dispatch(removeEvent(item));
-                }}
-                onPressEdit={() => {
-                  let getSimples = item.ticket.find(
-                    (it: TicketProps) => it.name === "Simples"
-                  ).value;
-                  let getCamarote = item.ticket.find(
-                    (it: TicketProps) => it.name === "Camarote"
-                  ).value;
-                  navigation.navigate("Edit", {
-                    event: {
-                      id: item.id,
-                      name: item.name,
-                      ticketSimples: getSimples,
-                      ticketCamarote: getCamarote,
-                      region: item.local.region,
-                    },
-                  });
-                }}
-                style={{ margin: 10 }}
-              />
-            )}
+            renderItem={({ item }) => {
+              var getSimples = item.ticket.find(
+                (it: TicketProps) => it.name === "Simples"
+              ).value;
+              var getCamarote = item.ticket.find(
+                (it: TicketProps) => it.name === "Camarote"
+              ).value;
+              return (
+                <EventDetailsAdmin
+                  label={item.name}
+                  ticketSimples={formatCurrency(getSimples)}
+                  ticketCamarote={formatCurrency(getCamarote)}
+                  region={item.local.region}
+                  onPressRemove={() => {
+                    dispatch(removeEvent(item));
+                  }}
+                  onPressEdit={() => {
+                    navigation.navigate("Edit", {
+                      event: {
+                        id: item.id,
+                        name: item.name,
+                        ticketSimples: getSimples,
+                        ticketCamarote: getCamarote,
+                        region: item.local.region,
+                      },
+                    });
+                  }}
+                  style={{ width: "100%", marginTop: 10 }}
+                />
+              );
+            }}
             ListEmptyComponent={() => (
               <Text bold size={STYLES.SIZES.medium} align="center">
                 Você não possui nenhum evento cadastrado

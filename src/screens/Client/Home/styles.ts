@@ -15,9 +15,10 @@ export const Top = styled.View`
   height: 10%;
   justify-content: space-evenly;
   align-items: center;
-`;
+  `;
 
 export const Bottom = styled.View`
   width: 90%;
   height: 90%;
+  align-items: center;
 `;

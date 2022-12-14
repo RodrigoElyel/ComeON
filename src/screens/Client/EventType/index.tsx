@@ -269,7 +269,7 @@ const EventTypeScreen = () => {
                     );
                   }
                 }}
-                style={{ margin: 10 }}
+                style={{ width: "100%" }}
               />
             )}
             ListEmptyComponent={

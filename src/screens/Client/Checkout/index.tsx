@@ -14,12 +14,12 @@ import Input from "../../../components/Input";
 import InputMask from "../../../components/InputMask";
 import Screen from "../../../components/Screen";
 
-// Lottie
-import Lottie from "lottie-react-native";
-import Success from "../../../assets/Lottie/success.json";
+// Iamge
+import Success from "../../../assets/ticket.png";
 
 //Icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Animatable from "react-native-animatable";
 
 // Services
 import { AlertFlashMessage } from "../../../services/AlertFlashMessage";
@@ -80,18 +80,21 @@ const CheckoutScreen = () => {
     <Screen>
       {paymentSuccess ? (
         <S.Container style={{ alignSelf: "center", justifyContent: "center" }}>
-          <Lottie
-            style={{ width: "70%", alignSelf: "center" }}
+          <Animatable.Image
+            style={{ width: "60%" }}
             source={Success}
-            autoPlay
-            speed={0.5}
+            resizeMode="contain"
+            animation="pulse"
+            delay={100}
+            iterationCount="infinite"
           />
+
           <Button
             label={"Concluir"}
             onPress={() => {
               navigation.pop(3);
             }}
-            style={{ width: "80%", marginTop: 50 }}
+            style={{ width: "90%", marginTop: 20 }}
           />
         </S.Container>
       ) : (

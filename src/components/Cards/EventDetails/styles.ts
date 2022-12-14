@@ -11,6 +11,7 @@ export const ContainerCard = styled.TouchableOpacity`
   flex-direction: row;
   background-color: ${STYLES.COLORS.white};
   padding: 16px;
+  margin-top: 8px;
   border-radius: 15px;
 `;
 
